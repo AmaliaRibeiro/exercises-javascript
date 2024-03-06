@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+    <head>
+
+    </head>
+    <body>
+        <canvas id="lluvia-canvas" width="800" height="800">
+        </canvas>
+        <script type="text/javascript">
+
+            canvas = document.getElementById("lluvia-canvas").getContext("2d")
+
+            canvas.fillStyle = "blue" // rgb("0-255","0-255","0-255") red green blue
+
+            var y  = 10;
+            var x = 10;
+            var fps = 800;
+          
+           
+
+            var cleanWindow = () => {
+                canvas.fillStyle = "white";
+                canvas.fillRect(0,0,800,800)
+            }
+
+            var paintDrop = (x, y) => {
+                canvas.fillStyle = "blue"                
+                canvas.fillRect(x, y, 10,10)
+            }
+          
+            var paintDrops = () => {
+               
+                // dibujar varias gotas en horizontal
+                for (var i = 0; i < 10; i++) { //este bucle me indica el numero de filas de gotas
+                    for (x = 0; i < 10; i++) {// me indica el numero de gotas en cada fila.
+                        paintDrop(x, y)//llama a la funcion
+
+                        x = x + 50; //incrementa la posicion x para la proxima gota
+                    }
+
+                    y = y + 40; //incrementa la posicion y para pasar a la siguiente fila
+                  
+                } 
+            
+            }
+
+            loop = ()=> {
+
+                cleanWindow() 
+
+                paintDrops()
+
+                setTimeout(loop,fps)
+
+            }
+
+            loop()
+
+
+        </script>
+    </body>
+</html>
