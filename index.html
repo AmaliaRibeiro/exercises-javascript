@@ -32,17 +32,17 @@
                
                 // dibujar varias gotas en horizontal
                 for (var i = 0; i < 10; i++) { //este bucle me indica el numero de filas de gotas
-                    for (x = 0; i < 10; i++) {// me indica el numero de gotas en cada fila.
-                        paintDrop(x, y)//llama a la funcion
 
-                        x = x + 50; //incrementa la posicion x para la proxima gota
+                        paintDrop(x, y)//llama a la funcion
+                        x = x + 20; //incrementa la posicion x para la proxima gota
                     }
 
-                    y = y + 40; //incrementa la posicion y para pasar a la siguiente fila
+                    x = 0;
+                    y = y + 50; //incrementa la posicion y para pasar a la siguiente fila
                   
                 } 
             
-            }
+            
 
             loop = ()=> {
 
@@ -56,7 +56,7 @@
 
             loop()
 
-
+         //para la proxima las gotas tendrias que bajar en posiciones aleatorias
         </script>
     </body>
 </html>
