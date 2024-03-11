@@ -28,7 +28,7 @@
                 canvas.fillRect(x, y, 10,10)
             }
             var inicializadorDeGotas = () => {
-              for(var i = 0; i < 20; i++) {
+              for(var i = 0; i < numeroDeGotas; i++) {
                 var randomX = Math.random() * 800;
                 var randomY = Math.random() * 800;
                 gotas.push({x: randomX, y: randomY})
@@ -38,16 +38,19 @@
             var paintDrops = () => {
                
                 // dibujar varias gotas en horizontal
-                for (i = 0; i < numeroDeGotas; i++) { //este bucle me indica el numero de filas de gotas
+                for (var i = 0; i < gotas.length; i++) { //recorre el array de gotas
+                        var objetoGota = gotas[i];  //se guarda en una variable el objeto gota.
+                        paintDrop(objetoGota.x, objetoGota.y);//llama a la funcion pasando las propiedades 
+                                                              //x e y de esa gota especifica, para que se 
+                                                              //dibuje en esa posicion especifica.
+                        objetoGota.y += 50; //incrementa la posicion par a pasar a la siguiente fila
 
-                        paintDrop(x, y)//llama a la funcion
-                        x = Math.random() * 800;
-                        
-                       y = Math.random() * 800;
+                        if (objetoGota.y >= 800) {
+                            objetoGota.y = 0;
+                            objetoGota.x = Math.random() * 800;
+                        }
                     }
-                    
-                    y = y + 50; //incrementa la posicion par a pasar a la siguiente fila
-                  
+                                  
                 } 
             
             var loop = ()=> {
@@ -62,7 +65,7 @@
             inicializadorDeGotas()
             loop()
 
-         //obtener el objeto del array, 
+        //obtener el objeto del array,
          //imprimir la gota con esa posicion 
          //actualizar el eje Y. Y asi para todos los elementos del array.
         </script>
