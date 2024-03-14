@@ -8,9 +8,9 @@
         </canvas>
         <script type="text/javascript">
 
-            canvas = document.getElementById("lluvia-canvas").getContext("2d")
+            canvas = document.getElementById("lluvia-canvas").getContext("2d");
 
-            canvas.fillStyle = "blue" // rgb("0-255","0-255","0-255") red green blue
+            canvas.fillStyle = "blue"; 
 
             var y  = 10;
             var x = 10;
@@ -21,12 +21,12 @@
 
             var cleanWindow = () => {
                 canvas.fillStyle = "white";
-                canvas.fillRect(0,0,800,800)
+                canvas.fillRect(0,0,800,800);
             }
 
             var paintDrop = (x, y, w, h) => {
-                canvas.fillStyle = "blue"                
-                canvas.fillRect(x, y, w, h)
+                canvas.fillStyle = "blue";                
+                canvas.fillRect(x, y, w, h);
             }
             var inicializadorDeGotas = () => {
               for(var i = 0; i < numeroDeGotas; i++) {
@@ -39,48 +39,45 @@
                             y: randomY, 
                             w: ancho, 
                             h: alto, 
-                            v: velocidad
+                            v: velocidad,
                          })
                }
             }
 
             var paintDrops = () => {
                
-                // dibujar varias gotas en horizontal
-                for (var i = 0; i < gotas.length; i++) { //recorre el array de gotas
-                        var gota = gotas[i];  //se guarda en una variable el objeto gota.
-                        paintDrop(gota.x, gota.y, gota.w, gota.h, gota.v);//llama a la funcion pasando las propiedades 
-                                                              //x e y de esa gota especifica, para que se 
-                                                              //dibuje en esa posicion especifica.
+                for (var i = 0; i < gotas.length; i++) { 
+                        var gota = gotas[i];  
+                        paintDrop(gota.x, gota.y, gota.w, gota.h, gota.v);                               
+                                            
                         if (gota.y >= 800) {
                             gota.y = 0;
                             gota.x = Math.random() * 800;
+                            gota.h = Math.random() * 25;
+                            gota.w = Math.random() * 5;           
                         } else {
-                            gota.y += gota.v; //incrementa la posicion par a pasar a la siguiente fila
+                            gota.y += gota.v; 
                         }
                         
-                      if (gota.y >= 700) {
-                           
-                          var temp = gota.h // Guarda temporalmente el valor de la altura
-                          gota.h = gota.w  // Asigna el valor del ancho a la altura
-                          gota.w = temp; // Asigna el valor temporal ( seria la altura original) al ancho    
-                     } 
-                    }
-                                  
+                      if (gota.y >= 700) {  
+                          var temp = gota.h; 
+                          gota.h = gota.w;  
+                          gota.w = temp;     
+                     }   
+                    }              
                 } 
             
             var loop = ()=> {
 
-                cleanWindow() 
+                cleanWindow(); 
 
-                paintDrops()
+                paintDrops();
 
-                setTimeout(loop,fps)
-
+                setTimeout(loop,fps);
             }
-            inicializadorDeGotas()
-            loop()
-//agregar la velocidad de la gota
+
+            inicializadorDeGotas();
+            loop();
 
         </script>
     </body>
