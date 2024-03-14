@@ -17,21 +17,30 @@
             var fps = 800;
             var numeroDeGotas = 50;
             var gotas = [];
+            
 
             var cleanWindow = () => {
                 canvas.fillStyle = "white";
                 canvas.fillRect(0,0,800,800)
             }
 
-            var paintDrop = (x, y) => {
+            var paintDrop = (x, y, w, h) => {
                 canvas.fillStyle = "blue"                
-                canvas.fillRect(x, y, 10,10)
+                canvas.fillRect(x, y, w, h)
             }
             var inicializadorDeGotas = () => {
               for(var i = 0; i < numeroDeGotas; i++) {
                 var randomX = Math.random() * 800;
                 var randomY = Math.random() * 800;
-                gotas.push({x: randomX, y: randomY})
+                var ancho = Math.random() * 5;
+                var alto = Math.random() * 25;
+                var velocidad = Math.random() * 200;
+                gotas.push({x: randomX, 
+                            y: randomY, 
+                            w: ancho, 
+                            h: alto, 
+                            v: velocidad
+                         })
                }
             }
 
@@ -39,16 +48,23 @@
                
                 // dibujar varias gotas en horizontal
                 for (var i = 0; i < gotas.length; i++) { //recorre el array de gotas
-                        var objetoGota = gotas[i];  //se guarda en una variable el objeto gota.
-                        paintDrop(objetoGota.x, objetoGota.y);//llama a la funcion pasando las propiedades 
+                        var gota = gotas[i];  //se guarda en una variable el objeto gota.
+                        paintDrop(gota.x, gota.y, gota.w, gota.h, gota.v);//llama a la funcion pasando las propiedades 
                                                               //x e y de esa gota especifica, para que se 
                                                               //dibuje en esa posicion especifica.
-                        objetoGota.y += 50; //incrementa la posicion par a pasar a la siguiente fila
-
-                        if (objetoGota.y >= 800) {
-                            objetoGota.y = 0;
-                            objetoGota.x = Math.random() * 800;
+                        if (gota.y >= 800) {
+                            gota.y = 0;
+                            gota.x = Math.random() * 800;
+                        } else {
+                            gota.y += gota.v; //incrementa la posicion par a pasar a la siguiente fila
                         }
+                        
+                      if (gota.y >= 700) {
+                           
+                          var temp = gota.h // Guarda temporalmente el valor de la altura
+                          gota.h = gota.w  // Asigna el valor del ancho a la altura
+                          gota.w = temp; // Asigna el valor temporal ( seria la altura original) al ancho    
+                     } 
                     }
                                   
                 } 
@@ -64,10 +80,8 @@
             }
             inicializadorDeGotas()
             loop()
+//agregar la velocidad de la gota
 
-        //obtener el objeto del array,
-         //imprimir la gota con esa posicion 
-         //actualizar el eje Y. Y asi para todos los elementos del array.
         </script>
     </body>
 </html>
